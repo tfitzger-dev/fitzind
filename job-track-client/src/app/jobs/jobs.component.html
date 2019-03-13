@@ -1,6 +1,17 @@
-<p>
-  jobs works!
-</p>
-<ul>
-  <li *ngFor="let job of jobs">{{ job.name }}</li>
-</ul>
+<div class="row">
+  <div class="card" style="width: 15rem;" *ngFor="let job of jobs">
+    <div class="card-body">
+      <h5 class="card-title">{{ job.name }}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{ job.estimated_completion_date }}</h6>
+      <div class="card-body">
+        <p>Owners</p>
+        <ul>
+          <li *ngFor="let owner of job.owners">{{ owner }}</li>
+        </ul>
+
+      </div>
+      <a href="#" class="card-link">Card link</a>
+      <a href="#" class="card-link">Another link</a>
+    </div>
+  </div>
+</div>

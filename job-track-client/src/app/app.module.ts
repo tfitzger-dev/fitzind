@@ -7,6 +7,8 @@ import { JobsComponent } from './jobs/jobs.component';
 import {JobService} from "./services/job.service";
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
+import { AppRoutingModule } from './/app-routing.module';
+import {RouterModule} from "@angular/router";
 
 
 @NgModule({
@@ -17,7 +19,8 @@ import {FormsModule} from "@angular/forms";
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule,
   ],
   providers: [JobService],
   bootstrap: [AppComponent]

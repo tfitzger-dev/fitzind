@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 
 from job_track_api.models import Job, Task
 from job_track_api.permissions import IsAdminOrSelf, IsAdminOrOwner
@@ -22,7 +23,13 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
 class JobList(generics.ListCreateAPIView):
     queryset = Job.objects.all()
     serializer_class = JobSerializer
-    permission_classes = [IsAdminOrOwner]
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        if(self.request.user.is_staff):
+            return Job.objects.all()
+        else:
+            return Job.objects.filter(owners=self.request.user)
 
 
 class JobDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -37,7 +44,10 @@ class TaskList(generics.ListCreateAPIView):
     permission_classes = [IsAdminOrOwner]
 
     def get_queryset(self):
-        return Task.objects.filter(job=self.kwargs['job_key'])
+        if self.request.user.is_staff:
+            return Task.objects.filter(job=self.kwargs['job_key'])
+        else:
+            return Task.objects.filter(job=self.kwargs['job_key'], owners=self.request.user)
 
     def perform_create(self, serializer):
         serializer.save(job=Job.objects.get(pk=self.kwargs['job_key']))
