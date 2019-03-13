@@ -6,6 +6,7 @@ from job_track_api.models import Job, Task
 from job_track_api.permissions import IsAdminOrSelf, IsAdminOrOwner
 from job_track_api.serializers import UserSerializer, JobSerializer, TaskSerializer
 
+
 class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer

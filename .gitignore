@@ -260,4 +260,5 @@ fabric.properties
 .venv/
 
 .idea/*
+*.iml
 # End of https://www.gitignore.io/api/pycharm,python,django
