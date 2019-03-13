@@ -9,12 +9,16 @@ import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import { AppRoutingModule } from './/app-routing.module';
 import {RouterModule} from "@angular/router";
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { TasksComponent } from './tasks/tasks.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    JobsComponent
+    JobsComponent,
+    DashboardComponent,
+    TasksComponent
   ],
   imports: [
     BrowserModule,
