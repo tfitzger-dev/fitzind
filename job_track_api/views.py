@@ -41,22 +41,17 @@ class JobDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class TaskList(generics.ListCreateAPIView):
     serializer_class = TaskSerializer
-    permission_classes = [IsAdminOrOwner]
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         if self.request.user.is_staff:
-            return Task.objects.filter(job=self.kwargs['job_key'])
+            return Task.objects.all()
         else:
-            return Task.objects.filter(job=self.kwargs['job_key'], owners=self.request.user)
-
-    def perform_create(self, serializer):
-        serializer.save(job=Job.objects.get(pk=self.kwargs['job_key']))
+            return Task.objects.filter(owners=self.request.user)
 
 
 class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Task.objects.all()
     serializer_class = TaskSerializer
     lookup_url_kwarg = 'task_key'
     permission_classes = [IsAdminOrOwner]
-
-    def get_queryset(self):
-        return Task.objects.filter(job=self.kwargs['job_key'])

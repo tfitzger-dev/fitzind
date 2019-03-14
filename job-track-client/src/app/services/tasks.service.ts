@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Task} from "../models/Task";
+import {Observable} from "rxjs";
 import {Job} from "../models/Job";
-import {Observable} from "rxjs/Observable";
 
-@Injectable()
-export class JobService {
+@Injectable({
+  providedIn: 'root'
+})
+export class TasksService {
 
   constructor(private http:HttpClient) { }
 
-  public getJobs(): Observable<Job[]>{
+  public getTasks():Observable<Task[]>{
     let username: string = 'Don';
     let password: string = 'Don12345';
 
@@ -17,7 +20,6 @@ export class JobService {
       'Content-Type': 'application/json'
     });
     console.log(headers);
-    return this.http.get<Job[]>("http://localhost:8000/api/v1/jobs/", {headers: headers})
+    return this.http.get<Task[]>("http://localhost:8000/api/v1/tasks/", {headers: headers})
   }
-
 }

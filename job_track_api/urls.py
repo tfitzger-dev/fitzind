@@ -9,8 +9,8 @@ urlpatterns = [
     path('users/<int:pk>/', views.UserDetail.as_view(), name='user-detail'),
 
     path('jobs/', views.JobList.as_view(), name='job-list'),
-    path('jobs/<int:job_key>/', views.JobDetail.as_view(), name='job-detail'),
+    path('jobs/<int:pk>/', views.JobDetail.as_view(), name='job-detail'),
 
-    path('jobs/<int:job_key>/tasks', views.TaskList.as_view(), name='task-list'),
-    path('jobs/<int:job_key>/tasks/<int:task_key>/', views.TaskDetail.as_view(), name='task-detail'),
+    path('tasks/', views.TaskList.as_view(), name='task-list'),
+    path('tasks/<int:pk>/', views.TaskDetail.as_view(), name='task-detail'),
 ]

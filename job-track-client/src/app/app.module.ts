@@ -1,17 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { JobsComponent } from './jobs/jobs.component';
-import {JobService} from "./services/job.service";
+import { TasksComponent } from './tasks/tasks.component';
+import {JobsService} from "./services/jobs.service";
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
-import { AppRoutingModule } from './/app-routing.module';
-import {RouterModule} from "@angular/router";
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { TasksComponent } from './tasks/tasks.component';
-
+import {TasksService} from "./services/tasks.service";
 
 @NgModule({
   declarations: [
@@ -26,7 +24,7 @@ import { TasksComponent } from './tasks/tasks.component';
     HttpClientModule,
     AppRoutingModule,
   ],
-  providers: [JobService],
+  providers: [JobsService, TasksService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

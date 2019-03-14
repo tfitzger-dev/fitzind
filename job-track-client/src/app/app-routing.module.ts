@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {RouterModule, Routes} from "@angular/router";
+import { Routes, RouterModule } from '@angular/router';
+import {TasksComponent} from "./tasks/tasks.component";
 import {JobsComponent} from "./jobs/jobs.component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
-import {TasksComponent} from "./tasks/tasks.component";
 
 const routes: Routes = [
   {path: '', component: DashboardComponent},
@@ -11,11 +10,9 @@ const routes: Routes = [
   {path: 'tasks', component: TasksComponent}
 ];
 
+
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes)
-  ],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-
 export class AppRoutingModule { }
