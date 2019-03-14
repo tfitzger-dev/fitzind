@@ -1,4 +1,11 @@
-<H2>Jobs</H2>
-<app-jobs></app-jobs>
-<H2>Tasks</H2>
-<app-tasks></app-tasks>
+
+<ng-container *ngIf="isLoggedIn;else login_form">
+  <H2>Jobs</H2>
+  <app-jobs></app-jobs>
+  <H2>Tasks</H2>
+  <app-tasks></app-tasks>
+</ng-container>
+
+<ng-template #login_form>
+  <app-login></app-login>
+</ng-template>

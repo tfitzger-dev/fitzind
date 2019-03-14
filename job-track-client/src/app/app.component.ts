@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'job-track-client';
+
+  get isLoggedIn():boolean{
+    return localStorage.getItem("token") != null;
+  }
 }

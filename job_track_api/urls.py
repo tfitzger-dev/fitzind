@@ -3,7 +3,8 @@ from django.urls import path, include
 from job_track_api import views
 
 urlpatterns = [
-    path('api/v1/auth', include('rest_framework.urls')),
+    path('auth', include('rest_framework.urls')),
+    path('auth/login/', views.login),
 
     path('users/', views.UserList.as_view(), name='user-list'),
     path('users/<int:pk>/', views.UserDetail.as_view(), name='user-detail'),

@@ -12,14 +12,10 @@ export class TasksService {
   constructor(private http:HttpClient) { }
 
   public getTasks():Observable<Task[]>{
-    let username: string = 'Don';
-    let password: string = 'Don12345';
-
     let headers = new HttpHeaders({
-      'Authorization': "Basic " + btoa(username + ":" + password),
+      'Authorization': "Token " + localStorage.getItem("token"),
       'Content-Type': 'application/json'
     });
-    console.log(headers);
     return this.http.get<Task[]>("http://localhost:8000/api/v1/tasks/", {headers: headers})
   }
 }
