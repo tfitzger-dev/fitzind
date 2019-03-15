@@ -1,15 +1,40 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-from job_track_api.models import Job, Task
+from job_track_api.models import Job, Task, TaskLog
+
+
+class TaskLogSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = TaskLog
+        fields = ('url', 'id', 'user', 'task', 'hours', 'log_date')
+    user = serializers.HyperlinkedRelatedField(many=False, view_name='user-detail', read_only=True)
+    task = serializers.HyperlinkedRelatedField(many=False, view_name='task-detail', queryset=Task.objects.all())
+
+
+class TaskSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Task
+        fields = ('url', 'id', 'name', 'job', 'owners', 'hour_estimate', 'taskLogs')
+    owners = serializers.HyperlinkedRelatedField(many=True, view_name='user-detail', queryset=User.objects.all())
+    job = serializers.HyperlinkedRelatedField(many=False, view_name='job-detail', read_only=True)
+    taskLogs = TaskLogSerializer(many=True, read_only=True)
+
+
+class JobSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Job
+        fields = ('url', 'id', 'name', 'owners', 'estimated_completion_date', 'tasks')
+    owners = serializers.HyperlinkedRelatedField(many=True, view_name='user-detail', queryset=User.objects.all())
+    tasks = TaskSerializer(many=True, read_only=True)
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'email', 'first_name', 'last_name', 'password', 'jobs', 'tasks')
-    jobs = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-    tasks = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    jobs = JobSerializer(many=True, read_only=True)
+    tasks = TaskSerializer(many=True, read_only=True)
     password = serializers.CharField(write_only=True)
 
     def create(self, validated_data):
@@ -20,17 +45,3 @@ class UserSerializer(serializers.ModelSerializer):
                                         last_name=validated_data['last_name'])
         return user
 
-
-class JobSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Job
-        fields = ('id', 'name', 'owners', 'estimated_completion_date', 'tasks')
-    owners = serializers.PrimaryKeyRelatedField(many=True, queryset=User.objects.all())
-    tasks = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-
-
-class TaskSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Task
-        fields = ('id', 'name', 'job', 'owners', 'hour_estimate')
-    job = serializers.PrimaryKeyRelatedField(many=False, read_only=True)

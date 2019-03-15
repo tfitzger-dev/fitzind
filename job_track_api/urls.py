@@ -14,4 +14,7 @@ urlpatterns = [
 
     path('tasks/', views.TaskList.as_view(), name='task-list'),
     path('tasks/<int:pk>/', views.TaskDetail.as_view(), name='task-detail'),
+
+    path('taskLogs/', views.TaskLogList.as_view(), name='tasklog-list'),
+    path('taskLogs/<int:pk>/', views.TaskLogDetail.as_view(), name='tasklog-detail'),
 ]

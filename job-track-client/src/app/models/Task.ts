@@ -1,8 +1,11 @@
+import {TaskLog} from "./TaskLog";
+
 export class Task {
   id: number;
   name: string;
-  owners: number[];
+  job: string;
+  owners: string[];
   hour_estimate: number;
-  job: number;
+  taskLogs: TaskLog[];
 
 }

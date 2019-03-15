@@ -19,8 +19,9 @@ class Task(models.Model):
     modified_on = models.DateField(auto_now=True)
 
 
-class TaskHourLog(models.Model):
+class TaskLog(models.Model):
     hours = models.DecimalField(max_digits=12, decimal_places=2)
-    user = models.ForeignKey(User, related_name='taskHourLogs', on_delete=models.CASCADE)
-    task = models.ForeignKey(Task, related_name="taskHourLogs", on_delete=models.CASCADE)
+    log_date = models.DateField()
+    user = models.ForeignKey(User, related_name='taskLogs', on_delete=models.CASCADE)
+    task = models.ForeignKey(Task, related_name="taskLogs", on_delete=models.CASCADE)
 

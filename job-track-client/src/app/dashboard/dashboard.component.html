@@ -1,9 +1,17 @@
 
-<ng-container *ngIf="isLoggedIn;else login_form">
-  <H2>Jobs</H2>
+<ng-container *ngIf="user;else login_form">
+<!--  <H2>Jobs</H2>
   <app-jobs></app-jobs>
   <H2>Tasks</H2>
-  <app-tasks></app-tasks>
+  <app-tasks></app-tasks> -->
+  <h1>Jobs</h1>
+  <ul>
+    <li *ngFor="let job of user.jobs"> {{ job.name }}
+      <ul *ngIf="job.tasks.length > 0">
+        <li *ngFor="let task of job.tasks">{{ task.name }}</li>
+      </ul>
+    </li>
+  </ul>
 </ng-container>
 
 <ng-template #login_form>

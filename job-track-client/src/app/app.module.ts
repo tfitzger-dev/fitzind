@@ -13,6 +13,7 @@ import {TasksService} from "./services/tasks.service";
 import {AuthService} from "./services/auth.service";
 import { LoginComponent } from './auth/login/login.component';
 import { LogoutComponent } from './auth/logout/logout.component';
+import {UserService} from "./services/user.service";
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { LogoutComponent } from './auth/logout/logout.component';
     }),
     AppRoutingModule,
   ],
-  providers: [JobsService, TasksService, AuthService],
+  providers: [JobsService, TasksService, AuthService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
