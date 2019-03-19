@@ -1,5 +1,6 @@
 import {Job} from "./Job";
-import {Task} from './Task';
+import {Task} from './task.model';
+import {Deserializable} from "./deserializable.model";
 
 export class User{
   url: string;
@@ -9,4 +10,15 @@ export class User{
   last_name: string;
   jobs: Job[];
   tasks: Task[];
+
+  constructor(input: any){
+    Object.assign(this, input);
+    this.tasks = (input.tasks) ? input.tasks.map((task) => new Task(task)) : null
+    this.jobs = (input.jobs) ? input.jobs.map((job) => new Job(job)) : null
+
+  }
+
+  testFun(): string{
+    return "Hello World"
+  }
 }

@@ -4,14 +4,8 @@
   <app-jobs></app-jobs>
   <H2>Tasks</H2>
   <app-tasks></app-tasks> -->
-  <h1>Jobs</h1>
-  <ul>
-    <li *ngFor="let job of user.jobs"> {{ job.name }}
-      <ul *ngIf="job.tasks.length > 0">
-        <li *ngFor="let task of job.tasks">{{ task.name }}</li>
-      </ul>
-    </li>
-  </ul>
+  <app-jobs [jobs]="user.jobs"></app-jobs>
+  <app-tasks [tasks]="user.tasks"></app-tasks>
 </ng-container>
 
 <ng-template #login_form>

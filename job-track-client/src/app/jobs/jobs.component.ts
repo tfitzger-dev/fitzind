@@ -1,6 +1,7 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {Job} from "../models/Job";
 import {JobsService} from "../services/jobs.service";
+import {Task} from '../models/task.model';
 
 @Component({
   selector: 'app-jobs',
@@ -9,20 +10,19 @@ import {JobsService} from "../services/jobs.service";
 })
 export class JobsComponent implements OnInit {
 
-  jobs: Job[];
+  @Input() jobs: Job[];
   offset: number = 0;
   constructor(private jobService:JobsService, private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.weekStart.setDate(this.weekStart.getDate() - this.weekStart.getDay());
-
-    this.jobService.getJobs().subscribe(
-      (jobs) => this.jobs = jobs
-    )
   }
 
   addWeek(offset: number){
     this.offset += (offset * 7);
+  }
+
+  totalHoursForTask(task:Task):number{
+    return 0
   }
 
   get weekStart():Date {

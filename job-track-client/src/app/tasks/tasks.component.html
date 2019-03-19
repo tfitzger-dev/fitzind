@@ -1,12 +1,18 @@
 <div class="row">
-  <div class="card" style="width: 15rem;" *ngFor="let task of tasks">
-    <div class="card-body">
-      <h5 class="card-title">{{ task.name }}</h5>
-      <h6 class="card-subtitle mb-2 text-muted">{{ task.hour_estimate }}</h6>
-      <div class="card-body">
-      </div>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-  </div>
+  <button type="button" class="btn btn-outline-primary btn-sm col-sm-2 offset-sm-2" (click)="addWeek(-1)">Previous Week</button>
+  <span class="col-sm-4 text-center">{{weekStart | date}} to {{weekEnd | date}}</span>
+  <button type="button" class="btn btn-outline-primary btn-sm col-sm-2" (click)="addWeek(1)">Next Week</button>
+
+</div>
+<div class="row d-none d-sm-flex">
+  <span class="col-sm-3 offset-sm-1 text-center font-weight-bolder">Job Name</span>
+  <span *ngFor="let date of weekList" class="col-sm-1 font-weight-bolder">{{date | date:"MM/dd"}}</span>
+</div>
+<div class="row" *ngFor="let task of tasks">
+  <span class="col-sm-3 offset-sm-1 text-center align-bottom" style="margin-top: 9px;">{{task.name}}</span>
+  <ng-container *ngFor="let date of weekList; let i = index">
+  <span class="col-4 offset-1 d-sm-none font-weight-bolder">{{date | date:"MM/dd"}}</span>
+    <input class="col-6 col-sm-1 form-control input-sm" [value]="task.logByDate(date)"/>
+  </ng-container>
+
 </div>
