@@ -1,14 +1,10 @@
 <div class="row">
-  <h2>Jobs</h2>
+  <div class="col-3" *ngFor="let job of jobs">
+    <div class="card">
+      <h4 class="card-header">{{ job.name }}</h4>
+      <div class="card-body">
+        <h5 class="card-title">{{ job.estimated_completion_date | date }}</h5>
+      </div>
+    </div>
+  </div>
 </div>
-<ng-container *ngFor="let job of jobs">
-  <div class="row">
-    <span class="col-4"><h3>{{job.name}}</h3></span>
-    <span class="col-4 offset-2">{{job.estimated_completion_date | date}}</span>
-  </div>
-  <div class="row" *ngFor="let task of job.tasks">
-    <span class="col-3 offset-1">{{task.name}}</span>
-    <span class="col-3 offset-1">{{task.hour_estimate}}</span>
-    <span class="col-3 offset-1">{{task.totalHours()}}</span>
-  </div>
-</ng-container>

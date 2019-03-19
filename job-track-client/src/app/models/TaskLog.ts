@@ -1,4 +1,5 @@
 export class TaskLog{
+  url: string;
   id: number;
   user:string;
   task:string;
@@ -6,6 +7,7 @@ export class TaskLog{
   log_date:Date;
 
   constructor(input: any){
+    this.url = input.url;
     this.id = input.id;
     this.user = input.user;
     this.task = input.task;
